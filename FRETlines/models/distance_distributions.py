@@ -119,15 +119,16 @@ def worm_like_chain(rs, chain_length=100.0, kappa=0.5, norm=True,
 
 
 @jit(nopython=True)
-def gaussian_chain(r, rmsR=100, *_, norm=True):
+def gaussian_chain(r, rmsR=100, scale=1., norm=True):
     """
     Calculates the radial distribution function of a Gaussian chain in three
     dimensions
 
     :param rmsR: float
         Root mean square end-to-end distance
-    :param l: float
-        The segment length
+    :param scale: float
+        Unused. Only included to keep consistency with the other distance
+        distributions.
     :param r: numpy-array
         values of r should be in range [0, 1) - not including 1
 
