@@ -1,0 +1,11 @@
+# compiled files
+*.pyc
+# build and dist folders
+/dist/
+/build/
+/*.egg-info/
+# jupyter notebook files
+#*.ipynb
+/.ipynb_checkpoints/
+# other things to ignore
+*.DS_Store
