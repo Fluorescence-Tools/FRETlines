@@ -12,11 +12,12 @@ def normal_distribution(x, loc=0.0, scale=1.0, norm=True):
     :param norm: Boolean if true the returned array is normalized to one
     :return:
     """
-    y = 1.0 / (np.sqrt(2.0 * np.pi) * scale) * np.exp(- (x - loc)**2 /
+
+    p = 1.0 / (np.sqrt(2.0 * np.pi) * scale) * np.exp(- (x - loc)**2 /
                                                       (2. * scale**2))
     if norm:
-        y /= y.sum()
-    return y
+        p /= p.sum()
+    return p
 
 
 @jit(nopython=True)
@@ -30,6 +31,7 @@ def chi_distribution(x, loc=0.0, scale=1.0, norm=True):
     :param norm: Boolean if true the returned array is normalized to one
     :return:
     """
+    
     p = (loc / scale) * (normal_distribution(x, loc=loc, scale=scale,
                                              norm=False) +
                          (-1)*normal_distribution(x, loc=(-1)*loc, scale=scale,
@@ -40,9 +42,10 @@ def chi_distribution(x, loc=0.0, scale=1.0, norm=True):
 
 
 @jit(nopython=True)
-def worm_like_chain(rs, chain_length=100.0, kappa=0.5, normalize=True, distance=True):
-    """Calculates the radial distribution function of a worm-like-chain given the multiple piece-solution
-    according to:
+def worm_like_chain(rs, chain_length=100.0, kappa=0.5, norm=True, 
+                    distance=True):
+    """Calculates the radial distribution function of a worm-like-chain given
+    the multiple piece-solution according to:
 
     The radial distribution function of worm-like chain
     Eur Phys J E, 32, 53-69 (2010)
@@ -50,12 +53,14 @@ def worm_like_chain(rs, chain_length=100.0, kappa=0.5, normalize=True, distance=
     Parameters
     ----------
     rs: a vector at which the pdf is evaluated.
-    kappa: a parameter describing the stiffness (details see publication)
     chain_length: the total length of the chain.
-    normalize: If this is True the sum of the returned pdf vector is normalized to one.
-    distance: If this is False, the end-to-end vector distribution is calculated. If True the distribution 
-    the pdf is integrated over a sphere, i.e., the pdf of the end-to-end distribution function 
-    is multiplied with 4*pi*r**2.
+    kappa: a parameter describing the stiffness (details see publication)
+    norm: If this is True the sum of the returned pdf vector is normalized to
+    one.
+    distance: If this is False, the end-to-end vector distribution is
+    calculated. If True the distribution the pdf is integrated over a sphere,
+    i.e., the pdf of the end-to-end distribution function is multiplied with
+    4*pi*r**2.
 
     Returns
     -------
@@ -64,28 +69,12 @@ def worm_like_chain(rs, chain_length=100.0, kappa=0.5, normalize=True, distance=
     Examples
     --------
 
-    >>> import mfm.math.functions.rdf as rdf
+    >>> from FRETlines import distance_distributions as dist
     >>> import numpy as np
     >>> r = np.linspace(0, 0.99, 50)
     >>> kappa = 1.0
-    >>> rdf.worm_like_chain(r, kappa)
-    array([  4.36400392e-06,   4.54198260e-06,   4.95588702e-06,
-             5.64882576e-06,   6.67141240e-06,   8.09427111e-06,
-             1.00134432e-05,   1.25565315e-05,   1.58904681e-05,
-             2.02314725e-05,   2.58578047e-05,   3.31260228e-05,
-             4.24918528e-05,   5.45365051e-05,   7.00005025e-05,
-             8.98266752e-05,   1.15215138e-04,   1.47693673e-04,
-             1.89208054e-04,   2.42238267e-04,   3.09948546e-04,
-             3.96381668e-04,   5.06711496e-04,   6.47572477e-04,
-             8.27491272e-04,   1.05745452e-03,   1.35165891e-03,
-             1.72850634e-03,   2.21192991e-03,   2.83316807e-03,
-             3.63314697e-03,   4.66568936e-03,   6.00184475e-03,
-             7.73573198e-03,   9.99239683e-03,   1.29382877e-02,
-             1.67949663e-02,   2.18563930e-02,   2.85090497e-02,
-             3.72510109e-02,   4.86977611e-02,   6.35415230e-02,
-             8.23790455e-02,   1.05199154e-01,   1.30049143e-01,
-             1.49953168e-01,   1.47519190e-01,   9.57787954e-02,
-             1.45297018e-02,   1.53180248e-08])
+    >>> length = 100.0
+    >>> dist.worm_like_chain(r, length, kappa)
 
     References
     ----------
@@ -123,7 +112,7 @@ def worm_like_chain(rs, chain_length=100.0, kappa=0.5, normalize=True, distance=
         else:
             break
 
-    if normalize:
+    if norm:
         pr /= pr.sum()
 
     return pr
@@ -144,6 +133,9 @@ def gaussian_chain(r, rmsR=100, *_, norm=True):
 
     ..plot:: plots/rdf-gauss.py
 
+    Note: Third argument is ignored. It is there to achieve consistency with 
+    respect to the other distance distributions which require two input
+    arguments.
     """
     r2_mean = rmsR ** 2
     p = 4*np.pi*r**2/(2./3. * np.pi*r2_mean)**(3./2.) * np.exp(-3./2. * r**2 /
