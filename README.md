@@ -1,6 +1,6 @@
 # FRET-lines generator
 
-This is a small Python package for the calculation of FRET-lines for use in single-molecue FRET experiments using multiparameter fluorescence detection. These experiments are analyzed using two-dimensional histograms of the FRET efficiency, *E*, and the intensity-weighted average donor fluorescence lifetime, <&tau;<sub>D(A)</sub>><sub>F</sub>. FRET-lines define relationships between these two observables for different physical models of the system that can be oberlayed on the plot for comparison to the experimental data.
+This is a small Python package for the calculation of FRET-lines for use in single-molecue FRET experiments using multiparameter fluorescence detection. These experiments are analyzed using two-dimensional histograms of the FRET efficiency, *E*, and the intensity-weighted average donor fluorescence lifetime, <&tau;<sub>D(A)</sub>><sub>F</sub>. FRET-lines define relationships between these two observables for different physical models of the system that can be overlayed on the plot for comparison to the experimental data.
 
 For an ideal system, the two observables are related by the *ideal static FRET-line*:
 
