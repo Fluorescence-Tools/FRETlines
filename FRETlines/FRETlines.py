@@ -8,7 +8,7 @@ def static_FRET_line(R0=50, model=d.normal_distribution, param=(50, 5),
     species-averaged and intensity-average fluorescence lifetimes.
 
     :param R0: Förster radius in angstrom
-    :param model: Distance distribution model, imported from 
+    :param model: Distance distribution model, imported from
     distance_distributions submodule.
     :param param: Parameters of the distance distribution (tuple)
     :param variable_parameter: The variable parameter for the generation of the
@@ -68,8 +68,8 @@ def dynamic_FRET_line(R0=50,
     """ Construct dynamic FRET-line between two points.
 
     :param R0: Förster radius in angstrom
-    :param model1: Distance distribution model for the start point, imported from
-    distance_distributions submodule.
+    :param model1: Distance distribution model for the start point, imported
+    from distance_distributions submodule.
     :param model2: Distance distribution model for the end point, imported from
     distance_distributions submodule.
     :param param1: Parameters of the distance distribution for the start point
