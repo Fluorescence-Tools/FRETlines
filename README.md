@@ -20,6 +20,10 @@ Dynamic FRET-lines characterize the exchange between distinct conformations and 
 
 The FRETlines package can either be run from the root folder, or be installed to your local Python installation by `python setup.py install`. It is also available through PyPI by `pip install FRETlines`.
 
+## Dependencies
+
+numpy, numba
+
 # References
 
 [1] Eggeling C, et al. (2001) Data registration and selective single-molecule analysis using multi-parameter fluorescence detection. Journal of Biotechnology 86(3):163–180.
