@@ -11,11 +11,11 @@ setuptools.setup(
     description="Package for the calculation of FRET-lines",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/",
+    url="https://github.com/Fluorescence-Tools/FRETlines",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: GPL",
         "Operating System :: OS Independent",
     ],
 )
