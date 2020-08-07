@@ -1,3 +1,5 @@
+# FRETlines generator - A python library for the calcualtion of FRETlines
+#    Copyright (C) 2020  Anders Barth
 from .models import distance_distributions as d
 import numpy as np
 

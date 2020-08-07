@@ -30,3 +30,5 @@ numpy, numba
 
 [2] Kalinin S, Valeri A, Antonik M, Felekyan S, Seidel CAM (2010) Detection of structural dynamics by FRET: a photon distribution and fluorescence lifetime analysis of systems with multiple states. J Phys Chem B 114(23):7983–7995.
 
+FRETlines generator - A python library for the calcualtion of FRETlines
+    Copyright (C) 2020  Anders Barth
