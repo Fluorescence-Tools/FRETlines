@@ -23,6 +23,7 @@ The FRETlines package can either be run from the root folder, or be installed to
 ## Dependencies
 
 numpy, numba
+(for the interactive notebook: ipywidgets)
 
 # References
 
