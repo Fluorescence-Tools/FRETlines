@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="FRETlines",
-    version="0.0.4",
+    version="0.0.5",
     author="Anders Barth",
     author_email="anders.barth@gmail.com",
     description="Package for the calculation of FRET-lines",
