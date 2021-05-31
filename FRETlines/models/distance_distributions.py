@@ -44,25 +44,25 @@ def chi_distribution(x, loc=0.0, scale=1.0, norm=True):
 
 
 @jit(nopython=True)
-def worm_like_chain(rs, chain_length=100.0, kappa=0.5, norm=True, 
-                    distance=True):
+def worm_like_chain(rs, chain_length=100.0, kappa=0.5, norm=True):
     """Calculates the radial distribution function of a worm-like-chain given
     the multiple piece-solution according to:
 
     The radial distribution function of worm-like chain
     Eur Phys J E, 32, 53-69 (2010)
 
+    Note that the radial distribution function is integrated over a sphere
+    to obtain the PDF of the end-to-end distance distribution by multiplying
+    the radial distribution function with
+    4*pi*r**2.
+
     Parameters
     ----------
     rs: a vector at which the pdf is evaluated.
     chain_length: the total length of the chain.
     kappa: a parameter describing the stiffness (details see publication)
-    norm: If this is True the sum of the returned pdf vector is normalized to
-    one.
-    distance: If this is False, the end-to-end vector distribution is
-    calculated. If True the distribution the pdf is integrated over a sphere,
-    i.e., the pdf of the end-to-end distribution function is multiplied with
-    4*pi*r**2.
+    norm: If this is True the sum of the returned pdf vector is normalized
+    to one.
 
     Returns
     -------
@@ -110,7 +110,7 @@ def worm_like_chain(rs, chain_length=100.0, kappa=0.5, norm=True,
             g = (((-3./4.) / k - 1./2.) * r**2. + ((-23./64.) / k + 17./16.) * r**4. + ((-7./64.) / k - 9./16.) * r**6.)
             pri *= np.exp(g / (1.0 - r**2.0))
             pri *= i0(-d*k*a*(1+b)*r/(1-(b*r)**2))
-            pr[i] = pri
+            pr[i] = 4.0*np.pi*r*r*pri
         else:
             break
 
