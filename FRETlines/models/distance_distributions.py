@@ -95,9 +95,9 @@ def worm_like_chain(rs, chain_length=100.0, kappa=0.5, norm=True):
     pr = np.zeros_like(rs, dtype=np.float64)
 
     if k < 0.125:
-        d = k + 1.0
+        d = 1.0
     else:
-        d = 1.0 - 1.0/(0.177/(k-0.111)+6.4 * np.exp(0.783 * np.log(k-0.111)))
+        d = 1.0 - 1.0/(0.177/(k-0.111)+6.4 * (k-0.111)**(0.783))
 
     for i in range(len(rs)):
         r = rs[i]
@@ -105,7 +105,7 @@ def worm_like_chain(rs, chain_length=100.0, kappa=0.5, norm=True):
             r /= chain_length
 
             pri = ((1.0 - c * r**2.0) / (1.0 - r**2.0))**(5.0 / 2.0)
-            pri *= np.exp(-d * k * a * b * (1.0 + b) / (1.0 - (b*r)**2.0) * r**2.0)
+            pri *= np.exp(-d * k * a * b * (1.0 + b) * r**2.0 / (1.0 - (b*r)**2.0) )
 
             g = (((-3./4.) / k - 1./2.) * r**2. + ((23./64.) / k + 17./16.) * r**4. + ((-7./64.) / k - 9./16.) * r**6.)
             pri *= np.exp(g / (1.0 - r**2.0))
